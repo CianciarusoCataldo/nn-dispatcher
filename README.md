@@ -1,6 +1,6 @@
 # NN Image Analyzer - Main Server
 ![ ](logo.jpg)
-<br>
+<br><br>
 This is a component of NN Image Analyzer, a distributed system of neural networks developed to be simple and flexible, that can analyze image and detect faces and objects. You can find the other components here:
 - [Object Detector](https://github.com/CianciarusoCataldo/nn-object-detector)
 - [Face Detector](https://github.com/CianciarusoCataldo/nn-face-detector)
