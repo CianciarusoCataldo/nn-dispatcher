@@ -29,7 +29,7 @@ NN Image Analyzer is a distributed system, powered by Neural Networks. You can e
 
 I decided to not group all nodes under only one repository because every component of this system is independent from each other. This means that you can use the whole system or just one part, it's the same. The idea at the base of this project is to give to other user a tool to build a more complex system, not only to use it.
 
-## Technlogies
+## Technologies
 This project is written with **Python** programming language (**version 3.6.8**). It also use some external dependencies, that are listed into "requirements.txt" file for a fast setup. My personal <a href="https://nn-image-analyzer.herokuapp.com">release</a> contains also a simple website, that I develope using **HTML**, **CSS** and **Javascript**, with also powerful extensions like **Bootstrap** and **Font awesome**, and many others. I decided to not include this website in the public release to let you use your personal website, if you have one.
 
 ## Getting Started
