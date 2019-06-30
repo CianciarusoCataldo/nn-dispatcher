@@ -1,0 +1,10 @@
+runtime: python37
+
+libraries:
+- name: ssl
+  version: latest
+
+handlers:
+
+- url: /.*
+  script: auto
