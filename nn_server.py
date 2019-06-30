@@ -110,7 +110,10 @@ class Server_Thread(Thread):
     def get_value(self):
         return self._return_value
 
-    
+"""
+Create a Flask app and then apply optimizations, like gzip compression and
+caching policy
+"""
 app = Flask(__name__)
 Compress(app)
 
