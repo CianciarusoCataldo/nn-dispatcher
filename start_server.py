@@ -1,7 +1,6 @@
 import configparser
 import os
 import subprocess
-import sys
 
 config_path=os.path.join(os.getcwd(),'config.ini')
 print("\nStarting dispatching server..")
@@ -22,6 +21,7 @@ parser.read(config_path)
 if not "NETWORK" in parser.sections():
     f=open(config_path,'a')
     f.write("\n[NETWORK]")
+    f.write("\n#Add here the webserver port (default value 8080)\n")
     f.write("\nport=8080\n")
     f.close()
     print("\nNo port specified in config.ini file, it will be used the default value (8080)\n")

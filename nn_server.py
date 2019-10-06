@@ -20,8 +20,8 @@ SOFTWARE.
 
 Author: Cianciaruso Cataldo
 """
-
-from flask import Flask, request, send_from_directory
+import flask
+from flask import Flask, send_from_directory
 import os
 import sys
 import configparser
@@ -57,7 +57,7 @@ for server in server_list:
     try:
         request = requests.get(parser["SERVERS"][server])
         if request.status_code == 200:
-            servers[server]=parser["SERVERS"][server]
+            servers[str(server).upper()]=parser["SERVERS"][server]
             print("Server online : "+str(server)+" - "+str(servers[server])+"\n")
 
         else:
@@ -114,7 +114,7 @@ class Server_Thread(Thread):
             self._return_value=res
         
     def get_value(self):
-        return self._return_value
+        return self._server_name+""+self._return_value
 
 """
 Create a Flask app and then apply optimizations, like gzip compression and
@@ -227,7 +227,8 @@ def check_req():
     insert a custom header ("mode") in the message, containing server name.
     Note that this name must be in "servers", otherwise no request will be sent.
     """
-    if "mode" in request.headers:
+    print("Receiving..\n")
+    if "mode" in flask.request.headers:
         post_req_custom(request.headers["mode"])
     else:
         return post_req_all()
@@ -242,7 +243,7 @@ def post_req_all(header={}):
     :returns: response from the server(s)
     :rtype: str
     """
-    file = {'image': (request.files['image'].read())}
+    file = {'image': (flask.request.files['image'].read())}
     thread_list=[]
     response=""
     
@@ -271,7 +272,7 @@ def post_req_custom(server, header={}):
     :returns: response from the server(s)
     :rtype: str
     """
-    file = {'image': (request.files['image'].read())}
+    file = {'image': (flask.request.files['image'].read())}
     thread_req=Server_Thread(file, header, server)
     thread_req.start()
     thread_req.join()
