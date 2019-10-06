@@ -55,10 +55,10 @@ After that, you are ready to go !
 
 ### Configure
 
-Before you start, let's see how this application works. It's designed to be modular and system independent, so it can be easily integrated with every existing system. You can also build your own system, using this module as base. If you have your own server(or more than one), just write its (or their) url(s) in "servers_list.txt" file, one for row, following this pattern:
+Before you start, let's see how this application works. It's designed to be modular and system independent, so it can be easily integrated with every existing system. You can also build your own system, using this module as base. If you have your own server(or more than one), just write its (or their) url(s) in "config.ini" file, under "SERVERS" section, one for row, following this pattern:
 ```
-server1 <server1 url>
-server2 <server2 url>
+server1=<server1 url>
+server2=<server2 url>
 ....
 ```
 The program will read the server address from this file, and every request will be sent to every server in list. Be sure to write a unique name for every server, followed by his url, and separate them with a blank space. Note that the name associated with a server will be put at the start of its response. By default, I provide an example file that works on local machine, with every node running on different port (by default, this component use 8080 port, but feel free to change that, you decide). This webserver can show a website to user who reach his url with browser. You can use your own (I provide just a simple index.html, for general purpose), simply put your website files to "static" folder, and be sure to respect the original folder structure. There are many folder, one for every file type:
@@ -68,11 +68,11 @@ The program will read the server address from this file, and every request will 
 - Fonts : put your font file here (.woff ecc.)
 
 ## Run
-Once you have installed all dependencies required, you can start the webserver simply using the startup script provided (.cmd for Windows system, .sh for Linux system). Otherwise, open terminal and type:
+Once you have installed all dependencies required, you can start the webserver simply using the startup script (start_server.py), so just type:
 ```
-waitress-serve --listen=0.0.0.0:8080 nn_server:app
+python start_server.py
 ```
-This will start the Waitress webserver, it will listen to 8080 port. To test it, just open your browser and type this in the address bar:
+This will start the Waitress webserver, it will listen to 8080 port, by default (you can change this setting in 'config.ini file', just change "port" option under "NETWORK" section). To test it, just open your browser and type this in the address bar:
 ```
 http://localhost:8080
 ```

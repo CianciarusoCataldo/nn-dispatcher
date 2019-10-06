@@ -23,7 +23,10 @@ Author: Cianciaruso Cataldo
 
 from flask import Flask, request, send_from_directory
 import os
+import sys
+import configparser
 import requests
+import ipaddr
 from flask_optimizer import Compress
 from threading import Thread
 
@@ -45,24 +48,25 @@ if there is a problem during connection. If you don't specify a server list,
 a default value will be used.
 """
 servers={}
-if(os.path.isfile(os.path.join(execution_path,"servers_list.txt"))):
-    print("Reading servers list from file..")
-    with open(os.path.join(execution_path,"servers_list.txt"),'r') as sfile:
-        line=sfile.readline()
-        while line:
-            try:
-                server=line.replace("\n","").split(" ")
-                servers[server[0]]=server[1]
-                line=sfile.readline()
-            except:
-                #if a line is malformed, just skip it
-                pass
-else:
-    #create an empty server list file, by default
-    open(os.path.join(execution_path,"servers_list.txt"),'a').close()
+parser = configparser.ConfigParser()
+    
+parser.read(os.path.join(os.getcwd(),'config.ini'))
+server_list=parser["SERVERS"]
+print("\nReading custom server list..\n")
 
+for server in server_list:
+    try:
+        ip = ipaddr.IPAddress(parser["SERVERS"][server])
+        servers[server]=parser["SERVERS"][server]
+        print(str(server)+" - "+str(servers[server]))
 
+    except ValueError:
+        print(str(parser["SERVERS"][server])+" is not a valid ip address. Skipping..\n")
 
+if len(servers)<1:
+    print("Server list is empty, please add your server to config.ini file")
+    sys.exit(0)
+        
 class Server_Thread(Thread):
     """
     Custom Thread class, used to handle requests in asyncronous way.

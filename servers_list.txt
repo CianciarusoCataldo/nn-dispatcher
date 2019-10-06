@@ -1,2 +1,0 @@
-OBJ http://localhost:8082
-FACE http://localhost:8083
