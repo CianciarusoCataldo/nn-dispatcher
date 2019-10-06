@@ -26,7 +26,6 @@ import os
 import sys
 import configparser
 import requests
-import ipaddr
 from flask_optimizer import Compress
 from threading import Thread
 
@@ -56,15 +55,18 @@ print("\nReading custom server list..\n")
 
 for server in server_list:
     try:
-        ip = ipaddr.IPAddress(parser["SERVERS"][server])
-        servers[server]=parser["SERVERS"][server]
-        print(str(server)+" - "+str(servers[server]))
+        request = requests.get(parser["SERVERS"][server])
+        if request.status_code == 200:
+            servers[server]=parser["SERVERS"][server]
+            print("Server online : "+str(server)+" - "+str(servers[server])+"\n")
 
-    except ValueError:
-        print(str(parser["SERVERS"][server])+" is not a valid ip address. Skipping..\n")
-
+        else:
+            print(str(parser["SERVERS"][server])+" is not a valid url. Skipping..\n")
+    except:
+        print(str(parser["SERVERS"][server])+" is not a valid url. Skipping..\n")
+ 
 if len(servers)<1:
-    print("Server list is empty, please add your server to config.ini file")
+    print("\nServer list is empty, please add your server to config.ini file")
     sys.exit(0)
         
 class Server_Thread(Thread):
