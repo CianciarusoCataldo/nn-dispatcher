@@ -1,9 +1,11 @@
-# NN Image Analyzer - Main Server
+# NN Image Analyzer - API for face and object detection - Dispatcher component
 ![ ](logo.jpg)
 <br><br>
-This is a component of NN Image Analyzer, a distributed system of neural networks developed to be simple and flexible, that can analyze image and detect faces and objects. You can find the other components here:
+This is a component of NN Image Analyzer, an API powered by a distributed system of neural networks, developed to be simple and flexible, that can analyze image and detect faces and objects. You can find the other components here:
 - [Object Detector](https://github.com/CianciarusoCataldo/nn-object-detector)
 - [Face Detector](https://github.com/CianciarusoCataldo/nn-face-detector)
+
+This API simplify the image analysis for the final user. There are only few steps to follow to make the system works. 
 
 ## Summary
 - [Introduction](#introduction)
